@@ -4,8 +4,9 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
     <properties resource="jdbc.properties"></properties>
-<!--    <properties resource="application.properties"></properties>-->
+    <!--    <properties resource="application.properties"></properties>-->
     <context defaultModelType="flat" id="Mysql" targetRuntime="MyBatis3">
+
         <property name="endingDelimiter" value="`"/>
         <property name="beginningDelimiter" value="`"/>
         <property name="javaFileEncoding" value="UTF-8"/>
@@ -15,7 +16,7 @@
         <!-- 数据Model属性对应Column获取插件 -->
         <plugin type="com.itfsw.mybatis.generator.plugins.ModelColumnPlugin"/>
         <!-- 查询单条数据插件 -->
-        <plugin type="com.itfsw.mybatis.generator.plugins.SelectOneByExamplePlugin" />
+        <plugin type="com.itfsw.mybatis.generator.plugins.SelectOneByExamplePlugin"/>
         <!--        example文件-->
         <plugin type="com.itfsw.mybatis.generator.plugins.ExampleTargetPlugin">
             <!-- 修改Example类生成到目标包下 -->
@@ -39,8 +40,8 @@
         </plugin>
         <!--去掉注解 -->
         <commentGenerator>
-            <property name="suppressDate" value="true" />
-            <property name="suppressAllComments" value="true" />
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
         </commentGenerator>
         <!--jdbc的数据库连接 -->
         <jdbcConnection connectionURL="${spring.datasource.url}" driverClass="${spring.datasource.driver-class-name}"
@@ -64,6 +65,9 @@
         <table domainObjectName="GoodsInfo" tableName="goods_info"
                enableDeleteByExample="true" enableDeleteByPrimaryKey="true">
             <generatedKey column="id" identity="true" sqlStatement="MySql"/>
+<!--            处理日期datetime生成为Date而不是LocaDateTime-->
+            <columnOverride column="add_time" javaType="LocalDateTime" />
+            <columnOverride column="update_time" javaType="LocalDateTime" />
         </table>
 
         <!--        <table domainObjectName="SaasMemberEntity" tableName="saas_member"-->
